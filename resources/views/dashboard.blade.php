@@ -18,6 +18,16 @@
                     Cancel
                 </x-secondary-button>
             </x-form>
+
+            <hr class="border-gray-700 border-dashed my-4"/>
+
+            <div class="text-gray-800 uppercase font-bold mb-1">List of questions</div>
+
+            <div class="space-y-4">
+                @foreach($questions as $item)
+                    <x-question :question="$item"/>
+                @endforeach
+            </div>
         </div>
     </div>
 </x-app-layout>
