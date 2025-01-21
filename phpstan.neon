@@ -10,6 +10,9 @@ parameters:
     # Level 10 is the highest level
     level: 6
 
+    bootstrapFiles:
+        - ./vendor/autoload.php
+
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'
 #
