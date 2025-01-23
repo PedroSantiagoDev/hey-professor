@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends Controller
 {
@@ -35,6 +37,15 @@ class QuestionController extends Controller
                 'draft'    => true,
             ]
         );
+
+        return back();
+    }
+
+    public function destroy(Question $question): RedirectResponse
+    {
+        abort_unless(user()->can('destroy', $question), Response::HTTP_FORBIDDEN);
+
+        $question->delete();
 
         return back();
     }
