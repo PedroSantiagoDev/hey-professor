@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use Closure;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends Controller
 {
+    public function index(): View
+    {
+        return view('question.index', [
+            'questions' => user()->questions,
+        ]);
+    }
+
     public function store(): RedirectResponse
     {
-        $validated = request()->validate([
+        request()->validate([
             'question' => [
                 'required',
                 'min:10',
@@ -22,8 +31,22 @@ class QuestionController extends Controller
             ],
         ]);
 
-        Question::query()->create($validated);
+        user()->questions()->create(
+            [
+                'question' => request()->question,
+                'draft'    => true,
+            ]
+        );
 
-        return to_route('dashboard');
+        return back();
+    }
+
+    public function destroy(Question $question): RedirectResponse
+    {
+        abort_unless(user()->can('destroy', $question), Response::HTTP_FORBIDDEN);
+
+        $question->delete();
+
+        return back();
     }
 }
