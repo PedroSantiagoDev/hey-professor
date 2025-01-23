@@ -12,7 +12,6 @@ if [ $? -ne 0 ]; then
     exit 1;
 fi;
 
-# Formatar cada arquivo alterado usando o Laravel Pint
 
 
 exit 0;
