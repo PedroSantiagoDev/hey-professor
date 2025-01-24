@@ -68,6 +68,9 @@
                         <x-table.tr>
                             <x-table.td>{{ $question->question }}</x-table.td>
                             <x-table.td>
+                                <x-form :action="route('question.destroy', $question)" delete>
+                                    <x-primary-button class="bg-red-400 hover:bg-red-800">Delete</x-primary-button>
+                                </x-form>
                             </x-table.td>
                         </x-table.tr>
                     @endforeach
