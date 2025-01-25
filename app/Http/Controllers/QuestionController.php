@@ -43,6 +43,8 @@ class QuestionController extends Controller
 
     public function edit(Question $question): View
     {
+        abort_unless(user()->can('update', $question), Response::HTTP_FORBIDDEN);
+
         return view('question.edit', compact('question'));
     }
 
