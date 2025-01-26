@@ -75,6 +75,15 @@ class QuestionController extends Controller
     {
         abort_unless(user()->can('destroy', $question), Response::HTTP_FORBIDDEN);
 
+        $question->forceDelete();
+
+        return back();
+    }
+
+    public function archive(Question $question): RedirectResponse
+    {
+        abort_unless(user()->can('archive', $question), Response::HTTP_FORBIDDEN);
+
         $question->delete();
 
         return back();
