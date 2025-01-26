@@ -50,6 +50,8 @@ class QuestionController extends Controller
 
     public function update(Question $question): RedirectResponse
     {
+        abort_unless(user()->can('update', $question), Response::HTTP_FORBIDDEN);
+
         $question->question = request()->question;
         $question->save();
 
