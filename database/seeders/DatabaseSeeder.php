@@ -21,6 +21,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory\QuestionFactory;
             'email' => 'test@example.com',
         ]);
 
-        Question::factory()->count(10)->create();
+        User::factory()->create([
+            'name'  => 'Pedro Santiago',
+            'email' => 'pedro@example.com',
+        ]);
+
+        Question::factory()->count(20)->create();
     }
 }
