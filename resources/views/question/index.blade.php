@@ -43,6 +43,9 @@
                                     <x-form :action="route('question.publish', $question)" put>
                                         <x-primary-button class="bg-green-400 hover:bg-green-800">Publish</x-primary-button>
                                     </x-form>
+                                    <a href="{{route('question.edit', $question)}}">
+                                        <x-primary-button>Edit</x-primary-button>
+                                    </a>
                                 </div>
                             </x-table.td>
                         </x-table.tr>
@@ -68,6 +71,9 @@
                         <x-table.tr>
                             <x-table.td>{{ $question->question }}</x-table.td>
                             <x-table.td>
+                                <x-form :action="route('question.destroy', $question)" delete>
+                                    <x-primary-button class="bg-red-400 hover:bg-red-800">Delete</x-primary-button>
+                                </x-form>
                             </x-table.td>
                         </x-table.tr>
                     @endforeach
