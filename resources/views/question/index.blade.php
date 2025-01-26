@@ -43,6 +43,9 @@
                                     <x-form :action="route('question.publish', $question)" put>
                                         <x-primary-button class="bg-green-400 hover:bg-green-800">Publish</x-primary-button>
                                     </x-form>
+                                    <a href="{{route('question.edit', $question)}}">
+                                        <x-primary-button>Edit</x-primary-button>
+                                    </a>
                                 </div>
                             </x-table.td>
                         </x-table.tr>
