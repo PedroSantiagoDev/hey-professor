@@ -2,6 +2,7 @@
     'action',
     'post' => null,
     'put' => null,
+    'patch' => null,
     'delete' => null
 ])
 
@@ -12,6 +13,9 @@
     @endif
     @if($delete)
         @method('DELETE')
+    @endif
+    @if($patch)
+        @method('PATCH')
     @endif
     {{$slot}}
 </form>
