@@ -31,12 +31,13 @@ class QuestionController extends Controller
             ],
         ]);
 
-        user()->questions()->create(
-            [
-                'question' => request()->question,
-                'draft'    => true,
-            ]
-        );
+        user()->questions()
+            ->create(
+                [
+                    'question' => request()->question,
+                    'draft'    => true,
+                ]
+            );
 
         return back();
     }
@@ -71,11 +72,11 @@ class QuestionController extends Controller
         return to_route('question.index');
     }
 
-    public function destroy(Question $question): RedirectResponse
+    public function restore(int $id): RedirectResponse
     {
-        abort_unless(user()->can('destroy', $question), Response::HTTP_FORBIDDEN);
+        $question = Question::withTrashed()->find($id);
 
-        $question->forceDelete();
+        $question->restore();
 
         return back();
     }
@@ -85,6 +86,15 @@ class QuestionController extends Controller
         abort_unless(user()->can('archive', $question), Response::HTTP_FORBIDDEN);
 
         $question->delete();
+
+        return back();
+    }
+
+    public function destroy(Question $question): RedirectResponse
+    {
+        abort_unless(user()->can('destroy', $question), Response::HTTP_FORBIDDEN);
+
+        $question->forceDelete();
 
         return back();
     }
