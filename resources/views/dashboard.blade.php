@@ -8,11 +8,16 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="space-y-4">
-                @foreach($questions as $item)
-                    <x-question :question="$item"/>
+                <form method="GET">
+                    <x-input-label for="search" :value="__('Search')" />
+                    <x-text-input id="search" class="mt-1" type="text" name="search" :value="old('search')" />
+                </form>
+
+                @foreach ($questions as $item)
+                    <x-question :question="$item" />
                 @endforeach
 
-                {{$questions->links()}}
+                {{ $questions->withQueryString()->links() }}
             </div>
         </div>
     </div>
