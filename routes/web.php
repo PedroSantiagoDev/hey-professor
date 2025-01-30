@@ -1,11 +1,19 @@
 <?php
 
-use App\Http\Controllers\{DashboardController, ProfileController, Question, QuestionController};
+use App\Http\Controllers\{Auth\Github\CallbackController,
+    Auth\Github\RedirectController,
+    DashboardController,
+    ProfileController,
+    Question,
+    QuestionController};
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/github/login', RedirectController::class)->name('github.login');
+Route::get('/github/callback', CallbackController::class)->name('github.callback');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
